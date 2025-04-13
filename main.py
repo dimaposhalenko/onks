@@ -20,6 +20,17 @@ lose = font1.render('ТИ ОБОБА БАРАБУЛЬКА', True, (180, 0, 0))
 font2 = font.Font(None, 36)
 
 
+
+
+
+
+
+
+
+
+
+
+
 # нам потрібні такі картинки:
 img_back = "galaxy.jpg"  # фон гри
 img_hero = "pixil-frame-220.png"  # герой
@@ -34,16 +45,17 @@ img_enemy2 = "pixil-frame-05.png"  # ворог
 
 
 
+
 skin = "pixil-frame-90 (1).png"
 skin2 = "pixil-frame-09.png"
 skin3 = "pixil3-frame-0.png"
 skin4 = "pixil-frame-0 (14).png"
 skin5 = "pixil-frame-03.png"
-skin6 = "pixil-frame-06.png"
 skin7 = "pixil-frame-0 2(1).png"
 skin8 = "pixil-fra33me-0.png"
 skin9 = "pixi4l-frame-0.png"
 
+suhariki = "Без названия.jpg"
 
 
 
@@ -52,7 +64,7 @@ lost = 0  # пропущено кораблів
 max_lost = 15 # програли, якщо пропустили стільки
 # клас-батько для інших спрайтів
 
-
+life = 3
 
 
 
@@ -286,6 +298,7 @@ num_fire = 0
 rel_time = False
 
 while run:
+    print(life)
     # подія натискання на кнопку Закрити
     for e in event.get():
         if e.type == QUIT:
@@ -293,7 +306,7 @@ while run:
 
 
         elif e.type == KEYDOWN:
-            if e.key == K_RSHIFT:
+            if e.key == K_RETURN:
                 if num_fire < 30 and rel_time == False:
                     num_fire = num_fire + 1
                     fire_sound.play()
@@ -364,7 +377,7 @@ while run:
 
 
             if e.key == K_7:
-                ship = Player(skin6, 5, win_height - 100, 80, 100, 10)
+                ship = Player(img_hero, 5, win_height - 100, 80, 100, 10)
 
 
             if e.key == K_8:
@@ -372,6 +385,18 @@ while run:
 
             if e.key == K_9:
                 ship = Player(skin8, 5, win_height - 100, 80, 100, 10)
+
+
+
+            if e.key == K_9:
+                ship = Player(skin9, 5, win_height - 100, 80, 100, 10)
+
+            if e.key == K_p:
+                ship = Player(suhariki, 5, win_height - 100, 80, 100, 10)
+                ship1 = Player1(suhariki, 5, win_height - 100, 80, 100, 10)
+
+
+
 
 
 
@@ -477,7 +502,7 @@ while run:
 
         collides = sprite.groupcollide(asteroids, bullets, True, True)
         for c in collides:
-            asteroid = Enemy(img_enemy, randint(80, win_width - 80), -40, 80, 50, randint(1, 5))
+            asteroid = Enemy(img_ast, randint(80, win_width - 80), -40, 80, 50, randint(1, 5))
             asteroids.add(asteroid)
 
 
@@ -502,69 +527,75 @@ while run:
 
 
 
-        if sprite.spritecollide(ship1, monsters, False) or lost >= max_lost:
-            finish = True 
-            window.blit(lose, (200, 200))
+        if sprite.spritecollide(ship1, monsters, False) or sprite.spritecollide(ship, asteroids, False):
+            sprite.spritecollide(ship1, monsters, True)
+            sprite.spritecollide(ship1, monsters, True)
+            life = life - 1
+
+
+
+        if sprite.spritecollide(ship1, monsters1, False) or sprite.spritecollide(ship, asteroids, False):
+            sprite.spritecollide(ship1, monsters1, True)
+            sprite.spritecollide(ship1, monsters1, True)
+            life = life - 1
+
+        if sprite.spritecollide(ship1, monsters2, False) or sprite.spritecollide(ship, asteroids, False):
+            sprite.spritecollide(ship1, monsters2, True)
+            sprite.spritecollide(ship1, monsters2, True)
+            life = life - 1
+
+
+        if sprite.spritecollide(ship, monsters, False) or sprite.spritecollide(ship, asteroids, False):
+            sprite.spritecollide(ship, monsters, True)
+            sprite.spritecollide(ship, monsters, True)
+            life = life - 1
+
+        if sprite.spritecollide(ship, monsters1, False) or sprite.spritecollide(ship, asteroids, False):
+            sprite.spritecollide(ship, monsters1, True)
+            sprite.spritecollide(ship, monsters1, True)
+            life = life - 1
+
+
+
+        if sprite.spritecollide(ship, monsters2, False) or sprite.spritecollide(ship, asteroids, False):
+            sprite.spritecollide(ship, monsters2, True)
+            sprite.spritecollide(ship, monsters2, True)
+            life = life - 1
+
+        if life == 0 or lost >= max_lost:
+            finish = True
+            window.blit(lose, (200, 200,))
 
 
 
 
-        if sprite.spritecollide(ship1, monsters1, False) or lost >= max_lost:
-            finish = True 
-            window.blit(lose, (200, 200))
 
-
-        if sprite.spritecollide(ship1, monsters2, False) or lost >= max_lost:
-            finish = True 
-            window.blit(lose, (200, 200))
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        if sprite.spritecollide(ship, monsters, False) or lost >= max_lost:
-            finish = True 
-            window.blit(lose, (200, 200))
-
-
-
-
-        if sprite.spritecollide(ship, monsters1, False) or lost >= max_lost:
-            finish = True 
-            window.blit(lose, (200, 200))
-
-
-        if sprite.spritecollide(ship, monsters2, False) or lost >= max_lost:
-            finish = True 
-            window.blit(lose, (200, 200))
 
 
 
         if score >= goal:
             finish = True
             window.blit(win, (200, 200))
+
+
+        if life == 3:
+            life_color = (0, 150, 0)
+
+        if life == 2:
+            life_color = (150, 150, 0)
+
+        if life == 3:
+            life_color = (150, 0, 0)
+
+
+
+
+
+        text_life = font1.render(str(life), 1, life_color)
+        window.blit(text_life, (650, 10))
+
+
+
 
 
         display.update()
