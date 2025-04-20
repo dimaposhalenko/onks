@@ -8,7 +8,7 @@ mixer.music.load('doom_02.-Rip-_-Tear.ogg')
 mixer.music.play()
 fire_sound = mixer.Sound('aktivirovannaya-lazernaya-mina.ogg')
  
-goal = 100
+goal = 100 
 
 
 # шрифти і написи
@@ -18,13 +18,6 @@ font2 = font.Font(None, 36)
 win = font1.render('ТИ КЛУТОЙ ПЕПСИКОЛЬНИЙ!', True, (255, 180, 51))
 lose = font1.render('ТИ ОБОБА БАРАБУЛЬКА', True, (180, 0, 0))
 font2 = font.Font(None, 36)
-
-
-
-
-
-
-
 
 
 
@@ -42,10 +35,6 @@ img_enemy1 = "pixil-frame-4.png"  # ворог
 img_enemy2 = "pixil-frame-05.png"  # ворог
 
 
-
-
-
-
 skin = "pixil-frame-90 (1).png"
 skin2 = "pixil-frame-09.png"
 skin3 = "pixil3-frame-0.png"
@@ -57,7 +46,12 @@ skin9 = "pixi4l-frame-0.png"
 
 suhariki = "Без названия.jpg"
 
+baraboly = "Blue_Emoji_or_Joobi_2-_Free_Smiley_Download-removebg-preview.png"
 
+bomsh = "Без_назва3ния--removebg-preview.png"
+
+
+trybohki = "трубочки.jpg"
 
 score = 0  # збито кораблів
 lost = 0  # пропущено кораблів
@@ -157,24 +151,6 @@ class Player(GameSprite):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # клас спрайта-ворога
 class Enemy(GameSprite1):
     # рух ворога
@@ -238,8 +214,6 @@ background = transform.scale(image.load(img_back), (win_width, win_height))
 ship = Player(img_hero, 5, win_height - 100, 80, 100, 10)
 
 ship1 = Player1(img_hero2, 5, win_height - 100, 80, 100, 10)
-
-
 
 
 
@@ -395,30 +369,9 @@ while run:
                 ship = Player(suhariki, 5, win_height - 100, 80, 100, 10)
                 ship1 = Player1(suhariki, 5, win_height - 100, 80, 100, 10)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            if e.key == K_o:
+                ship = Player(baraboly, 5, win_height - 100, 80, 100, 10)
+                ship1 = Player1(bomsh, 5, win_height - 100, 80, 100, 10)
 
 
 
@@ -508,58 +461,33 @@ while run:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         if sprite.spritecollide(ship1, monsters, False) or sprite.spritecollide(ship, asteroids, False):
-            sprite.spritecollide(ship1, monsters, True)
-            sprite.spritecollide(ship1, monsters, True)
+            sprite.spritecollide(ship1, monsters, True) or sprite.spritecollide(ship1, monsters, True)
             life = life - 1
 
 
 
         if sprite.spritecollide(ship1, monsters1, False) or sprite.spritecollide(ship, asteroids, False):
-            sprite.spritecollide(ship1, monsters1, True)
-            sprite.spritecollide(ship1, monsters1, True)
+            sprite.spritecollide(ship1, monsters1, True) or sprite.spritecollide(ship1, monsters1, True)
             life = life - 1
 
         if sprite.spritecollide(ship1, monsters2, False) or sprite.spritecollide(ship, asteroids, False):
-            sprite.spritecollide(ship1, monsters2, True)
-            sprite.spritecollide(ship1, monsters2, True)
+            sprite.spritecollide(ship1, monsters2, True) or sprite.spritecollide(ship1, monsters2, True)
             life = life - 1
 
 
         if sprite.spritecollide(ship, monsters, False) or sprite.spritecollide(ship, asteroids, False):
-            sprite.spritecollide(ship, monsters, True)
-            sprite.spritecollide(ship, monsters, True)
+            sprite.spritecollide(ship, monsters, True) or sprite.spritecollide(ship, monsters, True)
             life = life - 1
 
         if sprite.spritecollide(ship, monsters1, False) or sprite.spritecollide(ship, asteroids, False):
-            sprite.spritecollide(ship, monsters1, True)
-            sprite.spritecollide(ship, monsters1, True)
+            sprite.spritecollide(ship, monsters1, True) or sprite.spritecollide(ship, monsters1, True)
             life = life - 1
 
 
 
         if sprite.spritecollide(ship, monsters2, False) or sprite.spritecollide(ship, asteroids, False):
-            sprite.spritecollide(ship, monsters2, True)
-            sprite.spritecollide(ship, monsters2, True)
+            sprite.spritecollide(ship, monsters2, True) or sprite.spritecollide(ship, monsters2, True)
             life = life - 1
 
         if life == 0 or lost >= max_lost:
